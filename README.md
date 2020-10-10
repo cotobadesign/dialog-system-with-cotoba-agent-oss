@@ -14,7 +14,7 @@ https://cotobaagent-developers-community.connpass.com/event/188047/
 
 ## サンプルコードの動かし方
 
-COTOBA Agent OSS (https://github.com/cotobadesign/cotoba-agent-oss.git) を
+COTOBA Agent OSS (https://github.com/cotobadesign/cotoba-agent-oss) を
 git clone で取得しセットアップを行った後、
 cotoba-agent-oss/dialog-engine ディレクトリの直下に, 
 sample1 〜 sample5 のディレクトリを配置してください。
