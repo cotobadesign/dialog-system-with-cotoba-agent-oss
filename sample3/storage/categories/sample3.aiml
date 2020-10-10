@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+  <category>
+    <pattern>私の名前は * です</pattern>
+    <template>
+      <think><set name="user_name"><star /></set></think>
+      <get name="user_name" />さん、こんにちは！
+    </template>
+  </category>
+  <category>
+    <pattern>私の出身地は * です</pattern>
+    <template>
+      <get name="user_name" />さんは
+      <set var="birth_place" ><star /></set> の生まれなんですね。
+      <get var="birth_place" /> は良いところですね。
+    </template>
+  </category>
+</aiml>

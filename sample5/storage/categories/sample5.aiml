@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>レストラン予約</pattern>
+    <template>
+      <think>
+	<set name="day">unknown</set>
+	<set name="time">unknown</set>
+	<set name="num_of_person">unknown</set>
+      </think>
+      <srai>__RESPONSE__</srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>日にちは * です</pattern>
+    <template>
+      <think>
+	<set name="day"><star /></set>
+      </think>
+      <srai>__RESPONSE__</srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>時間は * です</pattern>
+    <template>
+      <think>
+	<set name="time"><star /></set>
+      </think>
+      <srai>__RESPONSE__</srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>人数は * です</pattern>
+    <template>
+      <think>
+	<set name="num_of_person"><star /></set>
+      </think>
+      <srai>__RESPONSE__</srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>__RESPONSE__</pattern>
+    <template>
+      <think>
+	<set var="response">
+	  <condition name="day">
+	    <li value="unknown">日にち、</li>
+	    <li></li>
+	  </condition>
+	  <condition name="time">
+	    <li value="unknown">時間、</li>
+	    <li></li>
+	  </condition>
+	  <condition name="num_of_person">
+	    <li value="unknown">人数、</li>
+	    <li></li>
+	  </condition>
+	</set>
+      </think>
+      <condition var="response">
+	<li value="unknown">
+	  <get name="day" />、
+	  <get name="time" />、
+	  <get name="num_of_person" />で予約します
+	</li>
+	<li>
+	  <get var="response" />を教えて下さい
+	</li>
+      </condition>
+    </template>
+  </category>
+
+  <category>
+    <pattern> * </pattern>
+    <template>
+      <think>
+	<sraix>
+	  <host>http://localhost:5000/translator/translate</host>
+	  <method>POST</method>
+	  <header>"Content-type":"application/json;charset=UTF-8"</header>
+	  <body>[ {"src": "<star />"} ]</body>
+	</sraix>
+	<set var="first_item"><json var="__SUBAGENT_BODY__" index="0" /></set>
+	<set var="first_item_in_first_item"><json var="first_item" index="0" /></set>
+	<set var="tgt"><json var="first_item_in_first_item.tgt" /></set>
+      </think>
+      <get var="tgt" />
+    </template>
+  </category>
+
+</aiml>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+  <category>
+    <pattern>天気予報</pattern>
+    <template>
+      <think>
+	<set name="topic">S1</set>
+      </think>
+      場所は？
+    </template>
+  </category>
+
+  <topic name="S1">
+    <category>
+      <pattern>東京</pattern>
+      <template>
+	<think>
+	  <set name="topic">S2</set>
+	</think>
+	日にちは？
+      </template>
+    </category>
+    <category>
+      <pattern>*</pattern>
+      <template>場所は？</template>
+    </category>
+  </topic>
+
+  <topic name="S2">
+    <category>
+      <pattern>明日</pattern>
+      <template>
+	<think>
+	  <set name="topic">S3</set>
+	</think>
+	東京の明日の天気は晴れです
+      </template>
+    </category>
+    <category>
+      <pattern>*</pattern>
+      <template>日にちは？</template>
+    </category>
+  </topic>
+</aiml>
